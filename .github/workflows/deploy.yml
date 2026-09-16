@@ -1,0 +1,44 @@
+name: Pipeline CI/CD - Despliegue Automatico
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validar-codigo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar entorno PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Verificar sintaxis de archivos PHP
+        run: |
+          for file in $(find . -maxdepth 1 -name "*.php"); do
+            php -l "$file" || exit 1
+          done
+
+  desplegar-servidor:
+    needs: validar-codigo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Desplegar archivos por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.PORT }}
+          server-dir: htdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            README.md
