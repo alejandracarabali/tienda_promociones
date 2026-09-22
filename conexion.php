@@ -1,9 +1,8 @@
 <?php
-// Reemplaza estos datos con los de tu panel MySQL de InfinityFree
-$host = 'sqlXXX.infinityfree.com'; // Tu Host Name de MySQL
-$dbname = 'if0_42936396_xxx';     // Tu nombre de base de datos completa
-$username = 'if0_42936396';        // Tu usuario de FTP / MySQL
-$password = 'TU_CONTRASEÑA';       // Tu contraseña de InfinityFree
+$host     = 'sql207.infinityfree.com';          // Host exacto de tu captura
+$dbname   = 'if0_42936396_tienda_promociones'; // BD exacta de tu captura
+$username = 'if0_42936396';                    // Tu usuario de InfinityFree
+$password = 'TU_CONTRASEÑA_DE_INFINITYFREE';   // La contraseña de tu cuenta
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
