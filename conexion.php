@@ -1,13 +1,15 @@
 <?php
-$host = 'sqlXXX.infinityfree.com'; // Sustituye por tu MySQL Host Name
-$user = 'if0_38123456';             // Sustituye por tu MySQL User Name
-$pass = 'TU_CONTRASEÑA';            // Sustituye por tu contraseña
-$dbname = 'if0_38123456_tienda';   // Sustituye por tu Database Name
+// Reemplaza estos datos con los de tu panel MySQL de InfinityFree
+$host = 'sqlXXX.infinityfree.com'; // Tu Host Name de MySQL
+$dbname = 'if0_42936396_xxx';     // Tu nombre de base de datos completa
+$username = 'if0_42936396';        // Tu usuario de FTP / MySQL
+$password = 'TU_CONTRASEÑA';       // Tu contraseña de InfinityFree
 
 try {
-    $conexion = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
-    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    echo "Error al conectar con la base de datos: " . $e->getMessage();
+    die("Error de conexión a la base de datos: " . $e->getMessage());
 }
 ?>
